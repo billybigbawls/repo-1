@@ -6,6 +6,83 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		EF05F9D32CD67CB700430AE4 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF05F9D22CD67CB700430AE4 /* Launch Screen.storyboard */; };
+		EF05F9D62CD67F2400430AE4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EF05F9D42CD67F2400430AE4 /* Localizable.strings */; };
+		EF05F9D82CD67FEC00430AE4 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF05F9D72CD67FE700430AE4 /* SoundManager.swift */; };
+		EF4F17842CCF6F7800D89BBD /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17762CCC73EE00D89BBD /* MainTabView.swift */; };
+		EF4F17852CCF8AA100D89BBD /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F175E2CCC1C4900D89BBD /* ShopView.swift */; };
+		EF4F17862CCF8CF700D89BBD /* SquadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17452CCBA0D200D89BBD /* SquadApp.swift */; };
+		EF4F17872CCFC25A00D89BBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17462CCBA11B00D89BBD /* AppDelegate.swift */; };
+		EF4F17882CCFC26300D89BBD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F175A2CCBA52900D89BBD /* HomeView.swift */; };
+		EF4F17892CCFC26B00D89BBD /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17592CCBA52200D89BBD /* ChatView.swift */; };
+		EF4F178A2CCFC27100D89BBD /* AIWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17582CCBA51500D89BBD /* AIWheelView.swift */; };
+		EF4F178B2CCFC27D00D89BBD /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17572CCBA50700D89BBD /* MessageInputView.swift */; };
+		EF4F178C2CCFC28700D89BBD /* ChatBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17562CCBA4F900D89BBD /* ChatBackgroundView.swift */; };
+		EF4F178D2CCFC29800D89BBD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17732CCC256500D89BBD /* LoginView.swift */; };
+		EF4F178E2CCFC2A200D89BBD /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17722CCC255E00D89BBD /* OnboardingView.swift */; };
+		EF4F178F2CCFC2A800D89BBD /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17712CCC255400D89BBD /* AuthenticationView.swift */; };
+		EF4F17902CCFC2AE00D89BBD /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17752CCC257300D89BBD /* AuthButton.swift */; };
+		EF4F17912CCFC2B500D89BBD /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17742CCC256C00D89BBD /* AuthTextField.swift */; };
+		EF4F17922CCFC2C900D89BBD /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F177D2CCF686C00D89BBD /* ChatBubble.swift */; };
+		EF4F17932CCFC2D100D89BBD /* TypingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F177C2CCF685C00D89BBD /* TypingIndicator.swift */; };
+		EF4F17942CCFC2D700D89BBD /* ResponseLengthControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F177B2CCF684200D89BBD /* ResponseLengthControl.swift */; };
+		EF4F17952CCFC2E100D89BBD /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F177E2CCF6C3900D89BBD /* HomeViewModel.swift */; };
+		EF4F17962CCFC2F600D89BBD /* ShopkeeperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F175D2CCC1C3800D89BBD /* ShopkeeperView.swift */; };
+		EF4F17972CCFC30000D89BBD /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F175C2CCC1C2800D89BBD /* CategoryView.swift */; };
+		EF4F17982CCFC30600D89BBD /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F175B2CCC1C1400D89BBD /* ProgressView.swift */; };
+		EF4F17992CCFC30F00D89BBD /* AICard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17612CCC1C7900D89BBD /* AICard.swift */; };
+		EF4F179A2CCFC31600D89BBD /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17602CCC1C6700D89BBD /* ProgressBar.swift */; };
+		EF4F179B2CCFC31C00D89BBD /* AchievementStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F175F2CCC1C5A00D89BBD /* AchievementStar.swift */; };
+		EF4F179C2CCFC32200D89BBD /* ShopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F177F2CCF6CBD00D89BBD /* ShopViewModel.swift */; };
+		EF4F179D2CCFC32D00D89BBD /* SquadLinkUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17642CCC1F0400D89BBD /* SquadLinkUpView.swift */; };
+		EF4F179E2CCFC33700D89BBD /* SquadSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17632CCC1EF800D89BBD /* SquadSearchView.swift */; };
+		EF4F179F2CCFC33F00D89BBD /* SquadPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17622CCC1EEA00D89BBD /* SquadPreviewView.swift */; };
+		EF4F17A02CCFC35000D89BBD /* SelectedAIIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17672CCC1FED00D89BBD /* SelectedAIIndicator.swift */; };
+		EF4F17A12CCFC35700D89BBD /* SquadCircleAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17662CCC1F8200D89BBD /* SquadCircleAnimation.swift */; };
+		EF4F17A22CCFC35D00D89BBD /* SparkleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17652CCC1F4A00D89BBD /* SparkleEffect.swift */; };
+		EF4F17A32CCFC36500D89BBD /* SquadLinkUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17802CCF6CFA00D89BBD /* SquadLinkUpViewModel.swift */; };
+		EF4F17A42CCFC36D00D89BBD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F176A2CCC21BB00D89BBD /* SettingsView.swift */; };
+		EF4F17A52CCFC37300D89BBD /* SecuritySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17692CCC21B200D89BBD /* SecuritySettingsView.swift */; };
+		EF4F17A62CCFC37800D89BBD /* CustomizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17682CCC219300D89BBD /* CustomizationView.swift */; };
+		EF4F17A72CCFC37F00D89BBD /* SettingsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F176C2CCC21D400D89BBD /* SettingsRow.swift */; };
+		EF4F17A82CCFC38400D89BBD /* ToggleOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F176B2CCC21CA00D89BBD /* ToggleOption.swift */; };
+		EF4F17A92CCFC38E00D89BBD /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17812CCF6D4B00D89BBD /* SettingsViewModel.swift */; };
+		EF4F17AA2CCFC39700D89BBD /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F174A2CCBA18A00D89BBD /* AI.swift */; };
+		EF4F17AB2CCFC39C00D89BBD /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17492CCBA18200D89BBD /* Message.swift */; };
+		EF4F17AC2CCFC3A200D89BBD /* Squad.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17482CCBA17A00D89BBD /* Squad.swift */; };
+		EF4F17AD2CCFC3A900D89BBD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17472CCBA17100D89BBD /* User.swift */; };
+		EF4F17AE2CCFC3B100D89BBD /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F174F2CCBA2F000D89BBD /* LocationService.swift */; };
+		EF4F17AF2CCFC3B700D89BBD /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F174E2CCBA2DA00D89BBD /* NotificationService.swift */; };
+		EF4F17B02CCFC3BD00D89BBD /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F174D2CCBA2CF00D89BBD /* StorageService.swift */; };
+		EF4F17B12CCFC3C300D89BBD /* BiometricService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F174C2CCBA29F00D89BBD /* BiometricService.swift */; };
+		EF4F17B22CCFC3C800D89BBD /* EncryptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F174B2CCBA28D00D89BBD /* EncryptionService.swift */; };
+		EF4F17B32CCFC3CF00D89BBD /* AIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F177A2CCC7C1200D89BBD /* AIManager.swift */; };
+		EF4F17B42CCFC3D400D89BBD /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17792CCC7C0600D89BBD /* ChatManager.swift */; };
+		EF4F17B52CCFC3DB00D89BBD /* SquadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17782CCC7BFB00D89BBD /* SquadManager.swift */; };
+		EF4F17B62CCFC3E000D89BBD /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17772CCC7BE600D89BBD /* UserManager.swift */; };
+		EF4F17B72CCFC3E800D89BBD /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17522CCBA3ED00D89BBD /* View+Extensions.swift */; };
+		EF4F17B82CCFC3F400D89BBD /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17502CCBA3CA00D89BBD /* Date+Extensions.swift */; };
+		EF4F17B92CCFC3FB00D89BBD /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17512CCBA3DD00D89BBD /* Color+Extensions.swift */; };
+		EF4F17BA2CCFC43E00D89BBD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17552CCBA41D00D89BBD /* Constants.swift */; };
+		EF4F17BB2CCFC44400D89BBD /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17542CCBA40E00D89BBD /* Animations.swift */; };
+		EF4F17BC2CCFC44A00D89BBD /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17532CCBA40500D89BBD /* HapticManager.swift */; };
+		EF4F17BD2CCFC45000D89BBD /* StorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17832CCF6D9200D89BBD /* StorageProvider.swift */; };
+		EF4F17BE2CCFC45700D89BBD /* AIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17822CCF6D8900D89BBD /* AIProvider.swift */; };
+		EF65602D2CCFE9C600609D6D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = EF65602C2CCFE9C600609D6D /* Lottie */; };
+		EF8EA5132CE2123A007C4EEB /* shopkeeper_wave.json in Resources */ = {isa = PBXBuildFile; fileRef = EF8EA5122CE21235007C4EEB /* shopkeeper_wave.json */; };
+		EF8EA5152CE212E2007C4EEB /* shopkeeper_point.json in Resources */ = {isa = PBXBuildFile; fileRef = EF8EA5142CE212DB007C4EEB /* shopkeeper_point.json */; };
+		EF8EA5172CE21386007C4EEB /* shopkeeper_celebrate.json in Resources */ = {isa = PBXBuildFile; fileRef = EF8EA5162CE21383007C4EEB /* shopkeeper_celebrate.json */; };
+		EF8EA51E2CE44894007C4EEB /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8EA51D2CE4488B007C4EEB /* APIConfig.swift */; };
+		EF8EA5202CE448A3007C4EEB /* ChatGPTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8EA51F2CE4489D007C4EEB /* ChatGPTService.swift */; };
+		EF8EA5222CE448AF007C4EEB /* SecureKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8EA5212CE448A8007C4EEB /* SecureKeyManager.swift */; };
+		EF8EA5242CE448B8007C4EEB /* ChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8EA5232CE448B3007C4EEB /* ChatResponse.swift */; };
+		EF97B11E2D1E5CD200795B04 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF97B11D2D1E5CCF00795B04 /* AppTheme.swift */; };
+		EF97B1202D1E5D6A00795B04 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF97B11F2D1E5D6800795B04 /* ThemeManager.swift */; };
+		EF97B1222D21F16B00795B04 /* UserTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF97B1212D21F16900795B04 /* UserTypes.swift */; };
+		EF97B1242D30DDA700795B04 /* AttachmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF97B1232D30DDA200795B04 /* AttachmentsView.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		EF4F170C2CCB975E00D89BBD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,14 +101,100 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EF05F9D22CD67CB700430AE4 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		EF05F9D52CD67F2400430AE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EF05F9D72CD67FE700430AE4 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		EF4F16FB2CCB975B00D89BBD /* Squad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Squad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF4F170B2CCB975E00D89BBD /* SquadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SquadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF4F17152CCB975E00D89BBD /* SquadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SquadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF4F17452CCBA0D200D89BBD /* SquadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadApp.swift; sourceTree = "<group>"; };
+		EF4F17462CCBA11B00D89BBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EF4F17472CCBA17100D89BBD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		EF4F17482CCBA17A00D89BBD /* Squad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Squad.swift; sourceTree = "<group>"; };
+		EF4F17492CCBA18200D89BBD /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		EF4F174A2CCBA18A00D89BBD /* AI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
+		EF4F174B2CCBA28D00D89BBD /* EncryptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionService.swift; sourceTree = "<group>"; };
+		EF4F174C2CCBA29F00D89BBD /* BiometricService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricService.swift; sourceTree = "<group>"; };
+		EF4F174D2CCBA2CF00D89BBD /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		EF4F174E2CCBA2DA00D89BBD /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		EF4F174F2CCBA2F000D89BBD /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		EF4F17502CCBA3CA00D89BBD /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		EF4F17512CCBA3DD00D89BBD /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		EF4F17522CCBA3ED00D89BBD /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		EF4F17532CCBA40500D89BBD /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		EF4F17542CCBA40E00D89BBD /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
+		EF4F17552CCBA41D00D89BBD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EF4F17562CCBA4F900D89BBD /* ChatBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBackgroundView.swift; sourceTree = "<group>"; };
+		EF4F17572CCBA50700D89BBD /* MessageInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
+		EF4F17582CCBA51500D89BBD /* AIWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIWheelView.swift; sourceTree = "<group>"; };
+		EF4F17592CCBA52200D89BBD /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		EF4F175A2CCBA52900D89BBD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		EF4F175B2CCC1C1400D89BBD /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		EF4F175C2CCC1C2800D89BBD /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		EF4F175D2CCC1C3800D89BBD /* ShopkeeperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopkeeperView.swift; sourceTree = "<group>"; };
+		EF4F175E2CCC1C4900D89BBD /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
+		EF4F175F2CCC1C5A00D89BBD /* AchievementStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementStar.swift; sourceTree = "<group>"; };
+		EF4F17602CCC1C6700D89BBD /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		EF4F17612CCC1C7900D89BBD /* AICard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AICard.swift; sourceTree = "<group>"; };
+		EF4F17622CCC1EEA00D89BBD /* SquadPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadPreviewView.swift; sourceTree = "<group>"; };
+		EF4F17632CCC1EF800D89BBD /* SquadSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadSearchView.swift; sourceTree = "<group>"; };
+		EF4F17642CCC1F0400D89BBD /* SquadLinkUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadLinkUpView.swift; sourceTree = "<group>"; };
+		EF4F17652CCC1F4A00D89BBD /* SparkleEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkleEffect.swift; sourceTree = "<group>"; };
+		EF4F17662CCC1F8200D89BBD /* SquadCircleAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadCircleAnimation.swift; sourceTree = "<group>"; };
+		EF4F17672CCC1FED00D89BBD /* SelectedAIIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedAIIndicator.swift; sourceTree = "<group>"; };
+		EF4F17682CCC219300D89BBD /* CustomizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationView.swift; sourceTree = "<group>"; };
+		EF4F17692CCC21B200D89BBD /* SecuritySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecuritySettingsView.swift; sourceTree = "<group>"; };
+		EF4F176A2CCC21BB00D89BBD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		EF4F176B2CCC21CA00D89BBD /* ToggleOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleOption.swift; sourceTree = "<group>"; };
+		EF4F176C2CCC21D400D89BBD /* SettingsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRow.swift; sourceTree = "<group>"; };
+		EF4F17712CCC255400D89BBD /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		EF4F17722CCC255E00D89BBD /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		EF4F17732CCC256500D89BBD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		EF4F17742CCC256C00D89BBD /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
+		EF4F17752CCC257300D89BBD /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
+		EF4F17762CCC73EE00D89BBD /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		EF4F17772CCC7BE600D89BBD /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		EF4F17782CCC7BFB00D89BBD /* SquadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadManager.swift; sourceTree = "<group>"; };
+		EF4F17792CCC7C0600D89BBD /* ChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
+		EF4F177A2CCC7C1200D89BBD /* AIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIManager.swift; sourceTree = "<group>"; };
+		EF4F177B2CCF684200D89BBD /* ResponseLengthControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseLengthControl.swift; sourceTree = "<group>"; };
+		EF4F177C2CCF685C00D89BBD /* TypingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingIndicator.swift; sourceTree = "<group>"; };
+		EF4F177D2CCF686C00D89BBD /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
+		EF4F177E2CCF6C3900D89BBD /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		EF4F177F2CCF6CBD00D89BBD /* ShopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewModel.swift; sourceTree = "<group>"; };
+		EF4F17802CCF6CFA00D89BBD /* SquadLinkUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadLinkUpViewModel.swift; sourceTree = "<group>"; };
+		EF4F17812CCF6D4B00D89BBD /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		EF4F17822CCF6D8900D89BBD /* AIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProvider.swift; sourceTree = "<group>"; };
+		EF4F17832CCF6D9200D89BBD /* StorageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageProvider.swift; sourceTree = "<group>"; };
+		EF8EA5122CE21235007C4EEB /* shopkeeper_wave.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = shopkeeper_wave.json; sourceTree = "<group>"; };
+		EF8EA5142CE212DB007C4EEB /* shopkeeper_point.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = shopkeeper_point.json; sourceTree = "<group>"; };
+		EF8EA5162CE21383007C4EEB /* shopkeeper_celebrate.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = shopkeeper_celebrate.json; sourceTree = "<group>"; };
+		EF8EA51D2CE4488B007C4EEB /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
+		EF8EA51F2CE4489D007C4EEB /* ChatGPTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTService.swift; sourceTree = "<group>"; };
+		EF8EA5212CE448A8007C4EEB /* SecureKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureKeyManager.swift; sourceTree = "<group>"; };
+		EF8EA5232CE448B3007C4EEB /* ChatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponse.swift; sourceTree = "<group>"; };
+		EF97B11D2D1E5CCF00795B04 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		EF97B11F2D1E5D6800795B04 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		EF97B1212D21F16900795B04 /* UserTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypes.swift; sourceTree = "<group>"; };
+		EF97B1232D30DDA200795B04 /* AttachmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		EF97B1262D46DDD000795B04 /* Exceptions for "Squad" folder in "Squad" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = EF4F16FA2CCB975B00D89BBD /* Squad */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		EF4F16FD2CCB975B00D89BBD /* Squad */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				EF97B1262D46DDD000795B04 /* Exceptions for "Squad" folder in "Squad" target */,
+			);
 			path = Squad;
 			sourceTree = "<group>";
 		};
@@ -52,6 +215,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF65602D2CCFE9C600609D6D /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +239,10 @@
 		EF4F16F22CCB975B00D89BBD = {
 			isa = PBXGroup;
 			children = (
+				EF4F17282CCB9B9B00D89BBD /* App */,
+				EF4F17292CCB9BAE00D89BBD /* Features */,
+				EF4F172B2CCB9BED00D89BBD /* Core */,
+				EF4F172C2CCB9BF100D89BBD /* Resources */,
 				EF4F16FD2CCB975B00D89BBD /* Squad */,
 				EF4F170E2CCB975E00D89BBD /* SquadTests */,
 				EF4F17182CCB975E00D89BBD /* SquadUITests */,
@@ -90,6 +258,371 @@
 				EF4F17152CCB975E00D89BBD /* SquadUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EF4F17282CCB9B9B00D89BBD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F17762CCC73EE00D89BBD /* MainTabView.swift */,
+				EF4F17452CCBA0D200D89BBD /* SquadApp.swift */,
+				EF4F17462CCBA11B00D89BBD /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		EF4F17292CCB9BAE00D89BBD /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F176D2CCC250800D89BBD /* Authentication */,
+				EF4F172D2CCB9C9E00D89BBD /* Home */,
+				EF4F17312CCB9CB500D89BBD /* Shop */,
+				EF4F17322CCB9CBD00D89BBD /* SquadLinkUp */,
+				EF4F17332CCB9CC700D89BBD /* Settings */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		EF4F172B2CCB9BED00D89BBD /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				EF8EA5182CE4481F007C4EEB /* API */,
+				EF4F17402CCB9D8300D89BBD /* Models */,
+				EF4F173F2CCB9D7C00D89BBD /* Services */,
+				EF4F173E2CCB9D7900D89BBD /* Managers */,
+				EF4F173D2CCB9D7400D89BBD /* Utils */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		EF4F172C2CCB9BF100D89BBD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EF8EA5102CE1FDDE007C4EEB /* Animations */,
+				EF8EA5112CE1FDE6007C4EEB /* Sounds */,
+				EF05F9D22CD67CB700430AE4 /* Launch Screen.storyboard */,
+				EF05F9D42CD67F2400430AE4 /* Localizable.strings */,
+				EF05F9D72CD67FE700430AE4 /* SoundManager.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EF4F172D2CCB9C9E00D89BBD /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F17302CCB9CAF00D89BBD /* Views */,
+				EF4F172F2CCB9CAC00D89BBD /* Components */,
+				EF4F172E2CCB9CA400D89BBD /* ViewModels */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		EF4F172E2CCB9CA400D89BBD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F177E2CCF6C3900D89BBD /* HomeViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EF4F172F2CCB9CAC00D89BBD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F177D2CCF686C00D89BBD /* ChatBubble.swift */,
+				EF4F177C2CCF685C00D89BBD /* TypingIndicator.swift */,
+				EF4F177B2CCF684200D89BBD /* ResponseLengthControl.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		EF4F17302CCB9CAF00D89BBD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EF97B1232D30DDA200795B04 /* AttachmentsView.swift */,
+				EF4F175A2CCBA52900D89BBD /* HomeView.swift */,
+				EF4F17592CCBA52200D89BBD /* ChatView.swift */,
+				EF4F17582CCBA51500D89BBD /* AIWheelView.swift */,
+				EF4F17572CCBA50700D89BBD /* MessageInputView.swift */,
+				EF4F17562CCBA4F900D89BBD /* ChatBackgroundView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EF4F17312CCB9CB500D89BBD /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F17362CCB9D0300D89BBD /* Views */,
+				EF4F17352CCB9CFF00D89BBD /* Components */,
+				EF4F17342CCB9CF700D89BBD /* ViewModels */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
+		EF4F17322CCB9CBD00D89BBD /* SquadLinkUp */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F17392CCB9D1E00D89BBD /* Views */,
+				EF4F17382CCB9D1900D89BBD /* Components */,
+				EF4F17372CCB9D1700D89BBD /* ViewModels */,
+			);
+			path = SquadLinkUp;
+			sourceTree = "<group>";
+		};
+		EF4F17332CCB9CC700D89BBD /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F173C2CCB9D4F00D89BBD /* Views */,
+				EF4F173B2CCB9D4400D89BBD /* Components */,
+				EF4F173A2CCB9D3F00D89BBD /* ViewModels */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		EF4F17342CCB9CF700D89BBD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F177F2CCF6CBD00D89BBD /* ShopViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EF4F17352CCB9CFF00D89BBD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F17612CCC1C7900D89BBD /* AICard.swift */,
+				EF4F17602CCC1C6700D89BBD /* ProgressBar.swift */,
+				EF4F175F2CCC1C5A00D89BBD /* AchievementStar.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		EF4F17362CCB9D0300D89BBD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F175E2CCC1C4900D89BBD /* ShopView.swift */,
+				EF4F175D2CCC1C3800D89BBD /* ShopkeeperView.swift */,
+				EF4F175C2CCC1C2800D89BBD /* CategoryView.swift */,
+				EF4F175B2CCC1C1400D89BBD /* ProgressView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EF4F17372CCB9D1700D89BBD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F17802CCF6CFA00D89BBD /* SquadLinkUpViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EF4F17382CCB9D1900D89BBD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F17672CCC1FED00D89BBD /* SelectedAIIndicator.swift */,
+				EF4F17662CCC1F8200D89BBD /* SquadCircleAnimation.swift */,
+				EF4F17652CCC1F4A00D89BBD /* SparkleEffect.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		EF4F17392CCB9D1E00D89BBD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F17642CCC1F0400D89BBD /* SquadLinkUpView.swift */,
+				EF4F17632CCC1EF800D89BBD /* SquadSearchView.swift */,
+				EF4F17622CCC1EEA00D89BBD /* SquadPreviewView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EF4F173A2CCB9D3F00D89BBD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F17812CCF6D4B00D89BBD /* SettingsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EF4F173B2CCB9D4400D89BBD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F176C2CCC21D400D89BBD /* SettingsRow.swift */,
+				EF4F176B2CCC21CA00D89BBD /* ToggleOption.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		EF4F173C2CCB9D4F00D89BBD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F176A2CCC21BB00D89BBD /* SettingsView.swift */,
+				EF4F17692CCC21B200D89BBD /* SecuritySettingsView.swift */,
+				EF4F17682CCC219300D89BBD /* CustomizationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EF4F173D2CCB9D7400D89BBD /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F17432CCB9DD300D89BBD /* Extensions */,
+				EF4F17422CCB9DCF00D89BBD /* Helpers */,
+				EF4F17412CCB9DCC00D89BBD /* Protocols */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		EF4F173E2CCB9D7900D89BBD /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				EF97B11F2D1E5D6800795B04 /* ThemeManager.swift */,
+				EF4F177A2CCC7C1200D89BBD /* AIManager.swift */,
+				EF4F17792CCC7C0600D89BBD /* ChatManager.swift */,
+				EF4F17782CCC7BFB00D89BBD /* SquadManager.swift */,
+				EF4F17772CCC7BE600D89BBD /* UserManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		EF4F173F2CCB9D7C00D89BBD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F174F2CCBA2F000D89BBD /* LocationService.swift */,
+				EF4F174E2CCBA2DA00D89BBD /* NotificationService.swift */,
+				EF4F174D2CCBA2CF00D89BBD /* StorageService.swift */,
+				EF4F174C2CCBA29F00D89BBD /* BiometricService.swift */,
+				EF4F174B2CCBA28D00D89BBD /* EncryptionService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		EF4F17402CCB9D8300D89BBD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EF97B1212D21F16900795B04 /* UserTypes.swift */,
+				EF4F174A2CCBA18A00D89BBD /* AI.swift */,
+				EF4F17492CCBA18200D89BBD /* Message.swift */,
+				EF4F17482CCBA17A00D89BBD /* Squad.swift */,
+				EF4F17472CCBA17100D89BBD /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EF4F17412CCB9DCC00D89BBD /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F17832CCF6D9200D89BBD /* StorageProvider.swift */,
+				EF4F17822CCF6D8900D89BBD /* AIProvider.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		EF4F17422CCB9DCF00D89BBD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F17552CCBA41D00D89BBD /* Constants.swift */,
+				EF4F17542CCBA40E00D89BBD /* Animations.swift */,
+				EF4F17532CCBA40500D89BBD /* HapticManager.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		EF4F17432CCB9DD300D89BBD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EF97B11D2D1E5CCF00795B04 /* AppTheme.swift */,
+				EF4F17522CCBA3ED00D89BBD /* View+Extensions.swift */,
+				EF4F17512CCBA3DD00D89BBD /* Color+Extensions.swift */,
+				EF4F17502CCBA3CA00D89BBD /* Date+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		EF4F176D2CCC250800D89BBD /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F17702CCC254D00D89BBD /* Views */,
+				EF4F176E2CCC251400D89BBD /* Components */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		EF4F176E2CCC251400D89BBD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F17752CCC257300D89BBD /* AuthButton.swift */,
+				EF4F17742CCC256C00D89BBD /* AuthTextField.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		EF4F17702CCC254D00D89BBD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EF4F17732CCC256500D89BBD /* LoginView.swift */,
+				EF4F17722CCC255E00D89BBD /* OnboardingView.swift */,
+				EF4F17712CCC255400D89BBD /* AuthenticationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EF8EA5102CE1FDDE007C4EEB /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				EF8EA5162CE21383007C4EEB /* shopkeeper_celebrate.json */,
+				EF8EA5142CE212DB007C4EEB /* shopkeeper_point.json */,
+				EF8EA5122CE21235007C4EEB /* shopkeeper_wave.json */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		EF8EA5112CE1FDE6007C4EEB /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		EF8EA5182CE4481F007C4EEB /* API */ = {
+			isa = PBXGroup;
+			children = (
+				EF8EA51C2CE4483B007C4EEB /* Config */,
+				EF8EA51B2CE44838007C4EEB /* Services */,
+				EF8EA51A2CE44834007C4EEB /* Security */,
+				EF8EA5192CE44830007C4EEB /* Models */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		EF8EA5192CE44830007C4EEB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EF8EA5232CE448B3007C4EEB /* ChatResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EF8EA51A2CE44834007C4EEB /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				EF8EA5212CE448A8007C4EEB /* SecureKeyManager.swift */,
+			);
+			path = Security;
+			sourceTree = "<group>";
+		};
+		EF8EA51B2CE44838007C4EEB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EF8EA51F2CE4489D007C4EEB /* ChatGPTService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		EF8EA51C2CE4483B007C4EEB /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				EF8EA51D2CE4488B007C4EEB /* APIConfig.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +645,7 @@
 			);
 			name = Squad;
 			packageProductDependencies = (
+				EF65602C2CCFE9C600609D6D /* Lottie */,
 			);
 			productName = Squad;
 			productReference = EF4F16FB2CCB975B00D89BBD /* Squad.app */;
@@ -195,6 +729,9 @@
 			);
 			mainGroup = EF4F16F22CCB975B00D89BBD;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				EF65602B2CCFE9C600609D6D /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = EF4F16FC2CCB975B00D89BBD /* Products */;
 			projectDirPath = "";
@@ -212,6 +749,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF05F9D32CD67CB700430AE4 /* Launch Screen.storyboard in Resources */,
+				EF05F9D62CD67F2400430AE4 /* Localizable.strings in Resources */,
+				EF8EA5132CE2123A007C4EEB /* shopkeeper_wave.json in Resources */,
+				EF8EA5172CE21386007C4EEB /* shopkeeper_celebrate.json in Resources */,
+				EF8EA5152CE212E2007C4EEB /* shopkeeper_point.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +778,74 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF4F17A82CCFC38400D89BBD /* ToggleOption.swift in Sources */,
+				EF8EA5202CE448A3007C4EEB /* ChatGPTService.swift in Sources */,
+				EF4F17B12CCFC3C300D89BBD /* BiometricService.swift in Sources */,
+				EF4F17B02CCFC3BD00D89BBD /* StorageService.swift in Sources */,
+				EF4F17992CCFC30F00D89BBD /* AICard.swift in Sources */,
+				EF4F17952CCFC2E100D89BBD /* HomeViewModel.swift in Sources */,
+				EF4F17A62CCFC37800D89BBD /* CustomizationView.swift in Sources */,
+				EF4F17862CCF8CF700D89BBD /* SquadApp.swift in Sources */,
+				EF4F17B72CCFC3E800D89BBD /* View+Extensions.swift in Sources */,
+				EF4F17902CCFC2AE00D89BBD /* AuthButton.swift in Sources */,
+				EF4F17AE2CCFC3B100D89BBD /* LocationService.swift in Sources */,
+				EF4F17852CCF8AA100D89BBD /* ShopView.swift in Sources */,
+				EF4F17B82CCFC3F400D89BBD /* Date+Extensions.swift in Sources */,
+				EF4F17A42CCFC36D00D89BBD /* SettingsView.swift in Sources */,
+				EF4F17A92CCFC38E00D89BBD /* SettingsViewModel.swift in Sources */,
+				EF4F17962CCFC2F600D89BBD /* ShopkeeperView.swift in Sources */,
+				EF4F17BD2CCFC45000D89BBD /* StorageProvider.swift in Sources */,
+				EF4F17B22CCFC3C800D89BBD /* EncryptionService.swift in Sources */,
+				EF4F179E2CCFC33700D89BBD /* SquadSearchView.swift in Sources */,
+				EF4F17AF2CCFC3B700D89BBD /* NotificationService.swift in Sources */,
+				EF4F17882CCFC26300D89BBD /* HomeView.swift in Sources */,
+				EF4F17B92CCFC3FB00D89BBD /* Color+Extensions.swift in Sources */,
+				EF8EA51E2CE44894007C4EEB /* APIConfig.swift in Sources */,
+				EF4F17AA2CCFC39700D89BBD /* AI.swift in Sources */,
+				EF4F178F2CCFC2A800D89BBD /* AuthenticationView.swift in Sources */,
+				EF4F17972CCFC30000D89BBD /* CategoryView.swift in Sources */,
+				EF4F17BC2CCFC44A00D89BBD /* HapticManager.swift in Sources */,
+				EF4F17932CCFC2D100D89BBD /* TypingIndicator.swift in Sources */,
+				EF4F17912CCFC2B500D89BBD /* AuthTextField.swift in Sources */,
+				EF97B11E2D1E5CD200795B04 /* AppTheme.swift in Sources */,
+				EF8EA5222CE448AF007C4EEB /* SecureKeyManager.swift in Sources */,
+				EF4F17A22CCFC35D00D89BBD /* SparkleEffect.swift in Sources */,
+				EF4F17AB2CCFC39C00D89BBD /* Message.swift in Sources */,
+				EF05F9D82CD67FEC00430AE4 /* SoundManager.swift in Sources */,
+				EF4F17B42CCFC3D400D89BBD /* ChatManager.swift in Sources */,
+				EF4F17922CCFC2C900D89BBD /* ChatBubble.swift in Sources */,
+				EF4F17892CCFC26B00D89BBD /* ChatView.swift in Sources */,
+				EF4F17B52CCFC3DB00D89BBD /* SquadManager.swift in Sources */,
+				EF4F17BB2CCFC44400D89BBD /* Animations.swift in Sources */,
+				EF4F17A12CCFC35700D89BBD /* SquadCircleAnimation.swift in Sources */,
+				EF97B1222D21F16B00795B04 /* UserTypes.swift in Sources */,
+				EF4F17872CCFC25A00D89BBD /* AppDelegate.swift in Sources */,
+				EF4F179D2CCFC32D00D89BBD /* SquadLinkUpView.swift in Sources */,
+				EF4F17A32CCFC36500D89BBD /* SquadLinkUpViewModel.swift in Sources */,
+				EF4F17AC2CCFC3A200D89BBD /* Squad.swift in Sources */,
+				EF4F17BE2CCFC45700D89BBD /* AIProvider.swift in Sources */,
+				EF4F178C2CCFC28700D89BBD /* ChatBackgroundView.swift in Sources */,
+				EF4F179B2CCFC31C00D89BBD /* AchievementStar.swift in Sources */,
+				EF4F17BA2CCFC43E00D89BBD /* Constants.swift in Sources */,
+				EF4F178A2CCFC27100D89BBD /* AIWheelView.swift in Sources */,
+				EF4F178D2CCFC29800D89BBD /* LoginView.swift in Sources */,
+				EF4F17942CCFC2D700D89BBD /* ResponseLengthControl.swift in Sources */,
+				EF4F179C2CCFC32200D89BBD /* ShopViewModel.swift in Sources */,
+				EF4F178E2CCFC2A200D89BBD /* OnboardingView.swift in Sources */,
+				EF4F17A02CCFC35000D89BBD /* SelectedAIIndicator.swift in Sources */,
+				EF97B1242D30DDA700795B04 /* AttachmentsView.swift in Sources */,
+				EF4F17B62CCFC3E000D89BBD /* UserManager.swift in Sources */,
+				EF4F17842CCF6F7800D89BBD /* MainTabView.swift in Sources */,
+				EF4F179F2CCFC33F00D89BBD /* SquadPreviewView.swift in Sources */,
+				EF4F178B2CCFC27D00D89BBD /* MessageInputView.swift in Sources */,
+				EF4F179A2CCFC31600D89BBD /* ProgressBar.swift in Sources */,
+				EF4F17A72CCFC37F00D89BBD /* SettingsRow.swift in Sources */,
+				EF4F17B32CCFC3CF00D89BBD /* AIManager.swift in Sources */,
+				EF8EA5242CE448B8007C4EEB /* ChatResponse.swift in Sources */,
+				EF4F17A52CCFC37300D89BBD /* SecuritySettingsView.swift in Sources */,
+				EF4F17982CCFC30600D89BBD /* ProgressView.swift in Sources */,
+				EF4F17AD2CCFC3A900D89BBD /* User.swift in Sources */,
+				EF97B1202D1E5D6A00795B04 /* ThemeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +877,17 @@
 			targetProxy = EF4F17162CCB975E00D89BBD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EF05F9D42CD67F2400430AE4 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF05F9D52CD67F2400430AE4 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		EF4F171D2CCB975E00D89BBD /* Debug */ = {
@@ -396,13 +1017,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Squad/Preview Content\"";
+				DEVELOPMENT_TEAM = GL7LJR53TN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Squad/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -424,13 +1048,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Squad/Preview Content\"";
+				DEVELOPMENT_TEAM = GL7LJR53TN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Squad/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -552,6 +1179,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EF65602B2CCFE9C600609D6D /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EF65602C2CCFE9C600609D6D /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF65602B2CCFE9C600609D6D /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EF4F16F32CCB975B00D89BBD /* Project object */;
 }

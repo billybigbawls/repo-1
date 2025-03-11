@@ -1,0 +1,58 @@
+/* 
+  Localizable.strings
+  Squad
+
+  Created by Abdinoor Abdinoor on 11/2/24.
+  
+*/
+
+// Format: "key" = "value";
+
+// General
+"app_name" = "Squad";
+"ok" = "OK";
+"cancel" = "Cancel";
+"save" = "Save";
+"delete" = "Delete";
+"edit" = "Edit";
+
+// Authentication
+"login_title" = "Welcome to Squad";
+"login_subtitle" = "Chat with AI, your way";
+"quick_start" = "Quick Start";
+"sign_in_email" = "Sign in with Email";
+"device_id" = "Device ID";
+"email" = "Email";
+"password" = "Password";
+
+// Shop
+"shop_title" = "SHOP";
+"categories" = "Categories";
+"squad_linkup" = "Squad Link-up";
+"create_squad" = "Create Squad";
+"name_squad" = "Name Your Squad";
+"select_ai" = "Select AIs";
+
+// Chat
+"message_placeholder" = "Message...";
+"typing" = "typing...";
+"response_length_short" = "S";
+"response_length_medium" = "M";
+"response_length_long" = "L";
+
+// Settings
+"settings_title" = "Settings";
+"security" = "Security";
+"appearance" = "Appearance";
+"notifications" = "Notifications";
+"location_services" = "Location Services";
+"face_id" = "Face ID";
+"touch_id" = "Touch ID";
+"dark_mode" = "Dark Mode";
+"light_mode" = "Light Mode";
+
+// Errors
+"error_generic" = "Something went wrong";
+"error_network" = "Network error";
+"error_try_again" = "Please try again";
+
