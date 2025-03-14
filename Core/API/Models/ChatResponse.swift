@@ -7,108 +7,144 @@
 
 import Foundation
 
+// MARK: - Chat Response Models
+
 struct ChatResponse: Codable {
+    let content: String
+    let metadata: ResponseMetadata
+    
+    enum CodingKeys: String, CodingKey {
+        case content
+        case metadata
+    }
+}
+
+struct ResponseMetadata: Codable {
+    let tokens: Int
+    let processingTime: Double
+    let aiPersonality: String
+    let promptTokens: Int?
+    let completionTokens: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case tokens
+        case processingTime = "processing_time"
+        case aiPersonality = "ai_personality"
+        case promptTokens = "prompt_tokens"
+        case completionTokens = "completion_tokens"
+    }
+}
+
+// MARK: - Chat Request Models
+
+struct ChatRequest: Codable {
+    let message: String
+    let aiId: String?
+    let settings: RequestSettings?
+    
+    enum CodingKeys: String, CodingKey {
+        case message
+        case aiId = "ai_id"
+        case settings
+    }
+}
+
+struct RequestSettings: Codable {
+    let maxTokens: Int?
+    let temperature: Double?
+    let language: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case maxTokens = "max_tokens"
+        case temperature
+        case language
+    }
+}
+
+// MARK: - AI Personality Models
+
+struct AIPersonality: Codable, Identifiable {
     let id: String
-    let object: String
-    let created: Int
-    let model: String
-    let choices: [Choice]
-    let usage: Usage
+    let name: String
+    let description: String
+    let personalityType: String
+    let temperament: String
+    let speakingStyle: String
+    let responseLength: String
+    let isActive: Bool
     
-    struct Choice: Codable {
-        let index: Int
-        let message: Message
-        let finishReason: String?
-        
-        enum CodingKeys: String, CodingKey {
-            case index
-            case message
-            case finishReason = "finish_reason"
-        }
-    }
-    
-    struct Message: Codable {
-        let role: String
-        let content: String
-    }
-    
-    struct Usage: Codable {
-        let promptTokens: Int
-        let completionTokens: Int
-        let totalTokens: Int
-        
-        enum CodingKeys: String, CodingKey {
-            case promptTokens = "prompt_tokens"
-            case completionTokens = "completion_tokens"
-            case totalTokens = "total_tokens"
-        }
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case description
+        case personalityType = "personality_type"
+        case temperament
+        case speakingStyle = "speaking_style"
+        case responseLength = "response_length"
+        case isActive = "is_active"
     }
 }
 
-// Helper extensions for response handling
-extension ChatResponse {
-    var firstResponse: String? {
-        choices.first?.message.content
-    }
+// MARK: - Message Models
+
+struct MessageResponse: Codable {
+    let id: String
+    let content: String
+    let createdAt: Date
+    let isAI: Bool
+    let metadata: MessageMetadata?
+    let userId: String?
+    let aiId: String?
+    let squadId: String?
     
-    var tokenCount: Int {
-        usage.totalTokens
-    }
-    
-    var isComplete: Bool {
-        choices.first?.finishReason == "stop"
+    enum CodingKeys: String, CodingKey {
+        case id
+        case content
+        case createdAt = "created_at"
+        case isAI = "is_ai"
+        case metadata
+        case userId = "user_id"
+        case aiId = "ai_id"
+        case squadId = "squad_id"
     }
 }
 
-// Error response handling
-struct ChatErrorResponse: Codable {
-    let error: ErrorDetails
+struct MessageMetadata: Codable {
+    let tokens: Int?
+    let responseType: String?
+    let processingTime: Double?
+    let aiPersonality: String?
     
-    struct ErrorDetails: Codable {
-        let message: String
-        let type: String
-        let code: String?
+    enum CodingKeys: String, CodingKey {
+        case tokens
+        case responseType = "response_type"
+        case processingTime = "processing_time"
+        case aiPersonality = "ai_personality"
     }
 }
 
-// Response metadata for caching and analytics
-struct ResponseMetadata {
-    let timestamp: Date
-    let tokenCount: Int
-    let latency: TimeInterval
-    let model: String
+struct MessagesResponse: Codable {
+    let messages: [MessageResponse]
+    let totalCount: Int
+    let hasMore: Bool
     
-    init(response: ChatResponse, latency: TimeInterval) {
-        self.timestamp = Date()
-        self.tokenCount = response.usage.totalTokens
-        self.latency = latency
-        self.model = response.model
+    enum CodingKeys: String, CodingKey {
+        case messages
+        case totalCount = "total_count"
+        case hasMore = "has_more"
     }
 }
 
-// Usage tracking
-class UsageTracker {
-    static let shared = UsageTracker()
+// MARK: - Error Models
+
+struct ErrorResponse: Codable {
+    let error: String
+    let message: String
+    let statusCode: Int?
     
-    private var dailyTokenCount = 0
-    private var lastReset = Date()
-    
-    private init() {
-        resetDailyCount()
-    }
-    
-    func trackUsage(_ response: ChatResponse) {
-        dailyTokenCount += response.tokenCount
-    }
-    
-    func getDailyTokenCount() -> Int {
-        return dailyTokenCount
-    }
-    
-    private func resetDailyCount() {
-        Timer.scheduledTimer(withTimeInterval: 86400, repeats: true) { [weak self] _ in
-            self?.dailyTokenCount = 0
-            self?.lastReset = Date()
-        }
+    enum CodingKeys: String, CodingKey {
+        case error
+        case message
+        case statusCode = "status_code"
     }
 }

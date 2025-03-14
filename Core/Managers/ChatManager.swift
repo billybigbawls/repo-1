@@ -13,168 +13,276 @@ class ChatManager: ObservableObject {
     
     @Published private(set) var messages: [Message] = []
     @Published var isTyping = false
+    @Published var error: String? = nil
     
-    private let storageService = StorageService()
-    private let encryptionService = EncryptionService()
     private var cancellables = Set<AnyCancellable>()
+    private let networkService = NetworkService.shared
     
-    // Keep track of active chat context
-    private var currentAIId: UUID?
-    private var currentSquadId: UUID?
+    // MARK: - Initialization
     
     init() {
-        setupSubscriptions()
+        loadLocalMessages()
     }
     
     // MARK: - Public Methods
     
-    func loadChat(for aiID: UUID) {
-        currentAIId = aiID
-        currentSquadId = nil
-
-        guard let key = StorageService.StorageKey.messages(forAI: aiID) else {
-            print("Error: Failed to generate StorageKey for AI Chat")
-            messages = []
+    /// Sends a message to the AI and gets a response
+    func sendMessage(_ content: String, to ai: AI? = nil, attachments: [Message.Attachment]? = nil) {
+        guard let user = UserManager.shared.currentUser else {
+            self.error = "User not found"
             return
         }
-
-        if let savedMessages: [Message] = storageService.load([Message].self, forKey: key) {
-            messages = savedMessages.sorted(by: { $0.timestamp < $1.timestamp })
-        } else {
-            messages = []
-        }
-    }
-
-    func loadSquadChat(for squadID: UUID) {
-        currentSquadId = squadID
-        currentAIId = nil
-
-        guard let key = StorageService.StorageKey.messages(forSquad: squadID) else {
-            print("Error: Failed to generate StorageKey for Squad Chat")
-            messages = []
-            return
-        }
-
-        if let savedMessages: [Message] = storageService.load([Message].self, forKey: key) {
-            messages = savedMessages.sorted(by: { $0.timestamp < $1.timestamp })
-        } else {
-            messages = []
-        }
-    }
-
-    
-    func sendMessage(_ content: String, attachments: [Message.Attachment]? = nil) {
+        
+        // Create a local message to show immediately
         let message = Message(
-            id: UUID(),
+            id: UUID().uuidString,
             content: content,
-            timestamp: Date(),
-            type: .text,
-            sender: .user,
+            createdAt: Date(),
+            isAI: false,
+            sender: user,
+            ai: nil,
             attachments: attachments
         )
         
-        addMessage(message)
-        simulateAIResponse()
-    }
-    
-    func sendLocationContext(_ context: Message.LocationContext) {
-        let message = Message(
-            id: UUID(),
-            content: "Location shared",
-            timestamp: Date(),
-            type: .location,
-            sender: .user,
-            locationContext: context
-        )
-        
-        addMessage(message)
-        simulateAIResponse(forLocation: true)
-    }
-    
-    func clearChat() {
-        messages.removeAll()
-        saveMessages()
-    }
-    
-    // MARK: - Private Methods
-    
-    private func addMessage(_ message: Message) {
+        // Add message to UI immediately
         messages.append(message)
-        saveMessages()
+        saveLocalMessages()
         
-        // Update AI stats if it's a user message
-        if case .user = message.sender, let aiID = currentAIId {
+        // Update AI stats
+        if let ai = ai {
             AIManager.shared.updateAIStats(
-                ai: AI(id: aiID, name: "", category: .friend, description: "", avatar: "", backgroundColor: "", isLocked: false, stats: AI.AIStats(messagesCount: 0, responseTime: 0, userRating: 0, lastInteraction: Date()), securityEnabled: false),
+                ai: ai,
                 interaction: .messaged
             )
         }
-    }
-    
-    private func saveMessages() {
-        if let aiID = currentAIId, let key = StorageService.StorageKey.messages(forAI: aiID) {
-            storageService.save(messages, forKey: key)
-        } else if let squadID = currentSquadId, let key = StorageService.StorageKey.messages(forSquad: squadID) {
-            storageService.save(messages, forKey: key)
-        }
-    }
-
-    
-    private func setupSubscriptions() {
-        // Add any necessary publishers/subscribers
-    }
-    
-    // MARK: - Mock Response Simulation
-    
-    private func simulateAIResponse(forLocation: Bool = false) {
+        
+        // Indicate we're waiting for a response
         isTyping = true
         
-        // Simulate network delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 1...2)) {
-            let response = Message(
-                id: UUID(),
-                content: self.generateMockResponse(forLocation: forLocation),
-                timestamp: Date(),
-                type: .text,
-                sender: self.currentSquadId != nil ? .squad(self.currentSquadId!) : .ai(self.currentAIId!)
-            )
+        // Prepare the request parameters
+        let requestSettings = RequestSettings(
+            maxTokens: APIConfig.maxTokens,
+            temperature: APIConfig.temperature,
+            language: Locale.current.languageCode
+        )
+        
+        let request = ChatRequest(
+            message: content,
+            aiId: ai?.id,
+            settings: requestSettings
+        )
+        
+        // Handle attachments if present
+        var parameters: [String: Any]
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(request)
+            guard var params = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                throw NetworkError.requestFailed(NSError(domain: "ChatManager", code: 1, userInfo: nil))
+            }
             
-            self.isTyping = false
-            self.addMessage(response)
+            // Add attachment information if present
+            if let attachments = attachments, !attachments.isEmpty {
+                params["hasAttachments"] = true
+                // For now, we're just signaling that attachments exist
+                // In a full implementation, you'd upload these separately
+            }
+            
+            parameters = params
+        } catch {
+            self.error = "Failed to prepare message: \(error.localizedDescription)"
+            isTyping = false
+            return
+        }
+        
+        // Use async/await with Task
+        Task {
+            do {
+                let response: ChatResponse = try await networkService.request(
+                    endpoint: .aiGenerate,
+                    method: .post,
+                    parameters: parameters,
+                    requiresAuth: UserManager.shared.isAuthenticated()
+                )
+                
+                await MainActor.run {
+                    // Create AI message
+                    let aiMessage = Message(
+                        id: UUID().uuidString,
+                        content: response.content,
+                        createdAt: Date(),
+                        isAI: true,
+                        sender: nil,
+                        ai: ai
+                    )
+                    
+                    // Add metadata to the message
+                    aiMessage.metadata = Message.Metadata(
+                        tokens: response.metadata.tokens,
+                        processingTime: response.metadata.processingTime,
+                        aiPersonality: response.metadata.aiPersonality,
+                        promptTokens: response.metadata.promptTokens,
+                        completionTokens: response.metadata.completionTokens
+                    )
+                    
+                    // Update UI
+                    self.messages.append(aiMessage)
+                    self.isTyping = false
+                    self.saveLocalMessages()
+                }
+            } catch {
+                await MainActor.run {
+                    self.handleSendMessageError(error)
+                }
+            }
         }
     }
     
-    private func generateMockResponse(forLocation: Bool) -> String {
-        if forLocation {
-            return "I notice you're at a new location! Would you like any specific information about this area?"
+    /// Loads the chat history from the server
+    func loadMessageHistory(limit: Int = 50, offset: Int = 0) {
+        guard UserManager.shared.isAuthenticated() else {
+            // Load only local messages if not authenticated
+            self.loadLocalMessages()
+            return
+        }
+        
+        let parameters = ["limit": limit, "offset": offset]
+        
+        networkService.request(
+            endpoint: .messages,
+            method: .get,
+            parameters: parameters,
+            requiresAuth: true
+        )
+        .receive(on: DispatchQueue.main)
+        .sink(
+            receiveCompletion: { [weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.error = error.localizedDescription
+                    // Fallback to local messages
+                    self?.loadLocalMessages()
+                }
+            },
+            receiveValue: { [weak self] (response: MessagesResponse) in
+                guard let self = self else { return }
+                
+                // Convert API messages to local Message model
+                let mappedMessages = response.messages.map { message -> Message in
+                    let aiId = message.aiId
+                    let ai = aiId != nil ? AIManager.shared.getAI(withId: aiId!) : nil
+                    
+                    return Message(
+                        id: message.id,
+                        content: message.content,
+                        createdAt: message.createdAt,
+                        isAI: message.isAI,
+                        sender: message.isAI ? nil : UserManager.shared.currentUser,
+                        ai: ai
+                    )
+                }
+                
+                self.messages = mappedMessages
+                self.saveLocalMessages()
+            }
+        )
+        .store(in: &cancellables)
+    }
+    
+    /// Clears all messages
+    func clearMessages() {
+        messages = []
+        saveLocalMessages()
+    }
+    
+    // MARK: - Helper Methods
+    
+    private func handleSendMessageError(_ error: Error) {
+        let errorMessage: String
+        
+        if let networkError = error as? NetworkError {
+            switch networkError {
+            case .noInternetConnection:
+                errorMessage = "No internet connection. Please try again when you're back online."
+            case .unauthorized:
+                errorMessage = "Please log in to continue your conversation."
+            case .serverError:
+                errorMessage = "Our AI is taking a brief break. Please try again in a moment."
+            default:
+                errorMessage = "Something went wrong. Please try again."
+            }
         } else {
-            let responses = [
-                "That's interesting! Tell me more about that.",
-                "I understand. How does that make you feel?",
-                "Thank you for sharing that with me.",
-                "I see what you mean. Let's explore that further.",
-                "That's a great point! Here's what I think..."
-            ]
-            return responses.randomElement() ?? responses[0]
+            errorMessage = "Something went wrong. Please try again."
+        }
+        
+        // Add error message to chat as system message
+        let errorAI = AIManager.shared.defaultAI
+        let errorResponse = Message(
+            id: UUID().uuidString,
+            content: errorMessage,
+            createdAt: Date(),
+            isAI: true,
+            sender: nil,
+            ai: errorAI
+        )
+        
+        self.messages.append(errorResponse)
+        self.error = errorMessage
+        self.isTyping = false
+        self.saveLocalMessages()
+    }
+    
+    // MARK: - Persistence Methods
+    
+    private func saveLocalMessages() {
+        do {
+            let data = try JSONEncoder().encode(messages)
+            UserDefaults.standard.set(data, forKey: "chatMessages")
+        } catch {
+            print("Failed to save messages: \(error)")
+        }
+    }
+    
+    private func loadLocalMessages() {
+        guard let data = UserDefaults.standard.data(forKey: "chatMessages") else {
+            return
+        }
+        
+        do {
+            let localMessages = try JSONDecoder().decode([Message].self, from: data)
+            self.messages = localMessages
+        } catch {
+            print("Failed to load messages: \(error)")
         }
     }
 }
 
-// MARK: - Storage Key Extension
-extension StorageService.StorageKey {
-    static func messages(forAI aiID: UUID) -> StorageService.StorageKey? {
-        guard let key = StorageService.StorageKey(rawValue: "messages_ai_\(aiID.uuidString)") else {
-            print("Failed to generate StorageKey for AI")
-            return nil
-        }
-        return key
-    }
+// MARK: - Message+Metadata
 
-    static func messages(forSquad squadID: UUID) -> StorageService.StorageKey? {
-        guard let key = StorageService.StorageKey(rawValue: "messages_squad_\(squadID.uuidString)") else {
-            print("Failed to generate StorageKey for Squad")
-            return nil
+extension Message {
+    struct Metadata: Codable {
+        var tokens: Int
+        var processingTime: Double
+        var aiPersonality: String
+        var promptTokens: Int?
+        var completionTokens: Int?
+    }
+    
+    var metadata: Metadata? {
+        get {
+            _metadata
         }
-        return key
+        set {
+            _metadata = newValue
+        }
+    }
+    
+    private var _metadata: Metadata?
+}
+
+// MARK: - Helper Extensions for AIManager
+
+extension AIManager {
+    func getAI(withId id: String) -> AI? {
+        return availableAIs.first { $0.id == id }
     }
 }

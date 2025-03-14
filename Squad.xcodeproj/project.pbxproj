@@ -10,6 +10,8 @@
 		EF05F9D32CD67CB700430AE4 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF05F9D22CD67CB700430AE4 /* Launch Screen.storyboard */; };
 		EF05F9D62CD67F2400430AE4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EF05F9D42CD67F2400430AE4 /* Localizable.strings */; };
 		EF05F9D82CD67FEC00430AE4 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF05F9D72CD67FE700430AE4 /* SoundManager.swift */; };
+		EF1313992D822890004B28F0 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1313982D82288A004B28F0 /* APIResponse.swift */; };
+		EF13139B2D82A2BD004B28F0 /* SquadAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF13139A2D82A2B4004B28F0 /* SquadAPIService.swift */; };
 		EF4F17842CCF6F7800D89BBD /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17762CCC73EE00D89BBD /* MainTabView.swift */; };
 		EF4F17852CCF8AA100D89BBD /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F175E2CCC1C4900D89BBD /* ShopView.swift */; };
 		EF4F17862CCF8CF700D89BBD /* SquadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17452CCBA0D200D89BBD /* SquadApp.swift */; };
@@ -104,6 +106,8 @@
 		EF05F9D22CD67CB700430AE4 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		EF05F9D52CD67F2400430AE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EF05F9D72CD67FE700430AE4 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		EF1313982D82288A004B28F0 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		EF13139A2D82A2B4004B28F0 /* SquadAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadAPIService.swift; sourceTree = "<group>"; };
 		EF4F16FB2CCB975B00D89BBD /* Squad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Squad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF4F170B2CCB975E00D89BBD /* SquadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SquadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF4F17152CCB975E00D89BBD /* SquadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SquadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -596,6 +600,8 @@
 		EF8EA5192CE44830007C4EEB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EF13139A2D82A2B4004B28F0 /* SquadAPIService.swift */,
+				EF1313982D82288A004B28F0 /* APIResponse.swift */,
 				EF8EA5232CE448B3007C4EEB /* ChatResponse.swift */,
 			);
 			path = Models;
@@ -831,7 +837,9 @@
 				EF4F178D2CCFC29800D89BBD /* LoginView.swift in Sources */,
 				EF4F17942CCFC2D700D89BBD /* ResponseLengthControl.swift in Sources */,
 				EF4F179C2CCFC32200D89BBD /* ShopViewModel.swift in Sources */,
+				EF1313992D822890004B28F0 /* APIResponse.swift in Sources */,
 				EF4F178E2CCFC2A200D89BBD /* OnboardingView.swift in Sources */,
+				EF13139B2D82A2BD004B28F0 /* SquadAPIService.swift in Sources */,
 				EF4F17A02CCFC35000D89BBD /* SelectedAIIndicator.swift in Sources */,
 				EF97B1242D30DDA700795B04 /* AttachmentsView.swift in Sources */,
 				EF4F17B62CCFC3E000D89BBD /* UserManager.swift in Sources */,

@@ -2,206 +2,263 @@
 //  UserManager.swift
 //  Squad
 //
-//  Created by Abdinoor Abdinoor on 10/25/24.
+//  Created by Abdinoor Abdinoor on 11/12/24.
 //
 
 import Foundation
 import Combine
-import UIKit
 import LocalAuthentication
+import AuthenticationServices
 
-class UserManager: ObservableObject {
-    static let shared = UserManager()
-    
-    @Published private(set) var currentUser: User?
-    @Published private(set) var settings: UserSettings = UserSettings()
-    @Published var isAuthenticated = false
-    
-    private let storageService = StorageService()
-    private let biometricService = BiometricService()
-    private var cancellables = Set<AnyCancellable>()
-    
-    init() {
-        loadUser()
-        setupSubscriptions()
-    }
-    
-    // MARK: - Authentication Methods
-    
-    func authenticateWithDevice() async throws {
-        let deviceId = await UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
-        
-        // Create new user if needed
-        if currentUser == nil {
-            let user = User(
-                id: UUID(),
-                deviceId: deviceId,
-                email: nil,
-                settings: settings,
-                preferences: UserPreferences(),
-                stats: UserStats(
-                    totalMessages: 0,
-                    favoriteAIs: [],
-                    activeSquads: [],
-                    lastActive: Date()
-                )
-            )
-            currentUser = user
-        }
-        
-        isAuthenticated = true
-        saveUser()
-    }
-    
-    func authenticateWithEmail(_ email: String, password: String) async throws {
-        // Simulate network request
-        try await Task.sleep(nanoseconds: 1_000_000_000) // 1 second delay
-        
-        // In a real app, this would validate with a backend
-        guard email.contains("@") && password.count >= 6 else {
-            throw AuthError.invalidCredentials
-        }
-        
-        let deviceId = await UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
-        
-        let user = User(
-            id: UUID(),
-            deviceId: deviceId,
-            email: email,
-            settings: settings,
-            preferences: UserPreferences(),
-            stats: UserStats(
-                totalMessages: 0,
-                favoriteAIs: [],
-                activeSquads: [],
-                lastActive: Date()
-            )
-        )
-        
-        currentUser = user
-        isAuthenticated = true
-        saveUser()
-    }
-    
-    func logout() {
-        currentUser = nil
-        isAuthenticated = false
-        storageService.save(nil as User?, forKey: .user)
-    }
-    
-    // MARK: - Settings Methods
-    
-    func updateSettings(_ newSettings: UserSettings) {
-        settings = newSettings
-        if var updatedUser = currentUser {
-            updatedUser.settings = newSettings
-            currentUser = updatedUser
-            saveUser()
-        }
-    }
-    
-    func updatePreferences(_ newPreferences: UserPreferences) {
-        if var updatedUser = currentUser {
-            updatedUser.preferences = newPreferences
-            currentUser = updatedUser
-            saveUser()
-        }
-    }
-    
-    func toggleBiometricAuth() async throws {
-        let canUseBiometrics = await biometricService.canUseBiometrics()
-        guard canUseBiometrics else {
-            throw AuthError.biometricsNotAvailable
-        }
-        
-        settings.appSecurityEnabled.toggle()
-        if var updatedUser = currentUser {
-            updatedUser.settings.appSecurityEnabled = settings.appSecurityEnabled
-            currentUser = updatedUser
-            saveUser()
-        }
-    }
-    
-    // MARK: - Stats Methods
-    
-    func updateStats(interaction: UserInteraction) {
-        guard var updatedUser = currentUser else { return }
-        
-        switch interaction {
-        case .messageSent:
-            updatedUser.stats.totalMessages += 1
-            
-        case .aiInteraction(let aiId):
-            if !updatedUser.stats.favoriteAIs.contains(aiId) {
-                updatedUser.stats.favoriteAIs.append(aiId)
-            }
-            
-        case .squadInteraction(let squadId):
-            if !updatedUser.stats.activeSquads.contains(squadId) {
-                updatedUser.stats.activeSquads.append(squadId)
-            }
-        }
-        
-        updatedUser.stats.lastActive = Date()
-        currentUser = updatedUser
-        saveUser()
-    }
-    
-    // MARK: - Private Methods
-    
-    private func loadUser() {
-        if let savedUser: User = storageService.load(User.self, forKey: StorageService.StorageKey.user) {
-            currentUser = savedUser
-            settings = savedUser.settings
-            isAuthenticated = true
-        }
-    }
-    
-    private func saveUser() {
-        if let user = currentUser {
-            storageService.save(user, forKey: .user)
-        }
-    }
-    
-    private func setupSubscriptions() {
-        // Setup any necessary publishers/subscribers
-    }
-}
-
-// MARK: - Supporting Types
-
-enum AuthError: Error {
+enum AuthenticationError: Error {
     case invalidCredentials
-    case biometricsNotAvailable
     case networkError
+    case serverError
+    case userExists
+    case userNotFound
+    case biometricFailure
+    case biometricNotAvailable
+    case tokenExpired
     case unknown
     
     var localizedDescription: String {
         switch self {
         case .invalidCredentials:
-            return "Invalid email or password"
-        case .biometricsNotAvailable:
-            return "Biometric authentication is not available"
+            return "The email or password you entered is incorrect."
         case .networkError:
-            return "Network error occurred"
+            return "Network error. Please check your connection and try again."
+        case .serverError:
+            return "Server error. Please try again later."
+        case .userExists:
+            return "User with this email already exists."
+        case .userNotFound:
+            return "User not found."
+        case .biometricFailure:
+            return "Biometric authentication failed."
+        case .biometricNotAvailable:
+            return "Biometric authentication is not available on this device."
+        case .tokenExpired:
+            return "Your session has expired. Please log in again."
         case .unknown:
-            return "An unknown error occurred"
+            return "An unknown error occurred."
         }
     }
 }
 
-enum UserInteraction {
-    case messageSent
-    case aiInteraction(UUID)
-    case squadInteraction(UUID)
-}
-
-// MARK: - Preview Helpers
-
-extension UserManager {
-    static var preview: UserManager {
-        let manager = UserManager()
-        // Add mock data if needed
-        return manager
+class UserManager: ObservableObject {
+    // MARK: - Singleton
+    
+    static let shared = UserManager()
+    
+    // MARK: - Published Properties
+    
+    @Published var currentUser: User?
+    @Published var isAuthenticated: Bool = false
+    @Published var isLoading: Bool = false
+    @Published var authError: AuthenticationError?
+    
+    // MARK: - Private Properties
+    
+    private var cancellables = Set<AnyCancellable>()
+    private let networkService = NetworkService.shared
+    private let secureKeyManager = SecureKeyManager.shared
+    
+    // MARK: - Initialization
+    
+    private init() {
+        // Check if user is already authenticated
+        checkAuthentication()
+    }
+    
+    // MARK: - Authentication Methods
+    
+    /// Checks if the user is authenticated with valid tokens
+    func checkAuthentication() {
+        if secureKeyManager.isAuthenticated() && !secureKeyManager.isAccessTokenExpired() {
+            // We have a valid token, try to fetch user details
+            fetchCurrentUser()
+        } else if secureKeyManager.isAuthenticated() && !secureKeyManager.isRefreshTokenExpired() {
+            // Access token expired but refresh token is valid, try to refresh
+            Task {
+                await refreshAuthenticationToken()
+            }
+        } else {
+            // No valid tokens
+            self.isAuthenticated = false
+            self.currentUser = nil
+        }
+    }
+    
+    /// Registers a new user with email and password
+    func registerWithEmail(email: String, password: String, name: String?) async throws -> User {
+        isLoading = true
+        defer { isLoading = false }
+        
+        do {
+            // Create registration parameters
+            var parameters: [String: Any] = [
+                "email": email,
+                "password": password
+            ]
+            
+            if let name = name {
+                parameters["name"] = name
+            }
+            
+            // Make API request
+            let response: RegisterResponse = try await networkService.request(
+                endpoint: .register,
+                method: .post,
+                parameters: parameters,
+                requiresAuth: false
+            )
+            
+            // Save tokens
+            secureKeyManager.saveTokens(
+                accessToken: response.tokens.accessToken,
+                refreshToken: response.tokens.refreshToken
+            )
+            
+            // Save user ID
+            secureKeyManager.storeUserId(response.user.id)
+            
+            // Create and store user
+            let user = User(
+                id: response.user.id,
+                email: response.user.email,
+                name: response.user.name ?? "User",
+                isActive: response.user.isActive,
+                createdAt: response.user.createdAt
+            )
+            
+            await MainActor.run {
+                self.currentUser = user
+                self.isAuthenticated = true
+            }
+            
+            return user
+        } catch let error as NetworkError {
+            switch error {
+            case .httpError(let statusCode, _) where statusCode == 409:
+                throw AuthenticationError.userExists
+            case .unauthorized:
+                throw AuthenticationError.invalidCredentials
+            case .serverError:
+                throw AuthenticationError.serverError
+            case .noInternetConnection:
+                throw AuthenticationError.networkError
+            default:
+                throw AuthenticationError.unknown
+            }
+        } catch {
+            throw AuthenticationError.unknown
+        }
+    }
+    
+    /// Authenticates a user with email and password
+    func authenticateWithEmail(email: String, password: String) async throws -> User {
+        isLoading = true
+        defer { isLoading = false }
+        
+        do {
+            // Create login parameters
+            let parameters: [String: Any] = [
+                "email": email,
+                "password": password
+            ]
+            
+            // Make API request
+            let response: LoginResponse = try await networkService.request(
+                endpoint: .login,
+                method: .post,
+                parameters: parameters,
+                requiresAuth: false
+            )
+            
+            // Save tokens
+            secureKeyManager.saveTokens(
+                accessToken: response.tokens.accessToken,
+                refreshToken: response.tokens.refreshToken
+            )
+            
+            // Save user ID
+            secureKeyManager.storeUserId(response.user.id)
+            
+            // Create and store user
+            let user = User(
+                id: response.user.id,
+                email: response.user.email,
+                name: response.user.name ?? "User",
+                isActive: response.user.isActive,
+                createdAt: response.user.createdAt
+            )
+            
+            await MainActor.run {
+                self.currentUser = user
+                self.isAuthenticated = true
+            }
+            
+            return user
+        } catch let error as NetworkError {
+            switch error {
+            case .unauthorized:
+                throw AuthenticationError.invalidCredentials
+            case .serverError:
+                throw AuthenticationError.serverError
+            case .noInternetConnection:
+                throw AuthenticationError.networkError
+            default:
+                throw AuthenticationError.unknown
+            }
+        } catch {
+            throw AuthenticationError.unknown
+        }
+    }
+    
+    /// Authenticates a user with device ID (for anonymous users)
+    func authenticateWithDevice(deviceId: String) async throws -> User {
+        isLoading = true
+        defer { isLoading = false }
+        
+        do {
+            // Create device auth parameters
+            let parameters: [String: Any] = [
+                "deviceId": deviceId
+            ]
+            
+            // Make API request
+            let response: LoginResponse = try await networkService.request(
+                endpoint: .login,
+                method: .post,
+                parameters: parameters,
+                requiresAuth: false
+            )
+            
+            // Save tokens
+            secureKeyManager.saveTokens(
+                accessToken: response.tokens.accessToken,
+                refreshToken: response.tokens.refreshToken
+            )
+            
+            // Save user ID
+            secureKeyManager.storeUserId(response.user.id)
+            
+            // Create and store user
+            let user = User(
+                id: response.user.id,
+                email: response.user.email,
+                name: response.user.name ?? "Guest",
+                isActive: response.user.isActive,
+                createdAt: response.user.createdAt
+            )
+            
+            await MainActor.run {
+                self.currentUser = user
+                self.isAuthenticated = true
+            }
+            
+            return user
+            
+        }
     }
 }
