@@ -2,81 +2,108 @@
 //  LocationService.swift
 //  Squad
 //
-//  Created by Abdinoor Abdinoor on 10/25/24.
+//  Created for Squad App
 //
 
+import Foundation
 import CoreLocation
-import Combine
 
-class LocationService: NSObject, ObservableObject {
+class LocationService: NSObject, CLLocationManagerDelegate {
+    static let shared = LocationService()
+    
     private let locationManager = CLLocationManager()
-    private var locationUpdateTimer: Timer?
     
-    @Published var currentLocation: CLLocation?
-    @Published var locationContext: Message.LocationContext?
-    @Published var durationAtLocation: TimeInterval = 0
-    
-    override init() {
+    private override init() {
         super.init()
         setupLocationManager()
     }
     
     private func setupLocationManager() {
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.pausesLocationUpdatesAutomatically = false
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+    }
+    
+    func checkLocationAuthorization(completion: @escaping (Bool) -> Void) {
+        let status = locationManager.authorizationStatus
         
-        requestLocationPermission()
-    }
-    
-    func requestLocationPermission() {
-        locationManager.requestAlwaysAuthorization()
-    }
-    
-    func startMonitoring() {
-        locationManager.startUpdatingLocation()
-        startLocationDurationTimer()
-    }
-    
-    private func startLocationDurationTimer() {
-        locationUpdateTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-            self?.updateLocationDuration()
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            completion(true)
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            completion(false)
+        case .denied, .restricted:
+            completion(false)
+        @unknown default:
+            completion(false)
         }
     }
     
-    private func updateLocationDuration() {
-        durationAtLocation += 1
-        if durationAtLocation >= 180 { // 3 minutes
-            analyzeCurrentLocation()
+    func getCurrentLocation(completion: @escaping (CLLocation?) -> Void) {
+        let status = locationManager.authorizationStatus
+        
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            locationManager.requestLocation()
+            if let location = locationManager.location {
+                completion(location)
+            } else {
+                completion(nil)
+            }
+        default:
+            completion(nil)
         }
     }
     
-    private func analyzeCurrentLocation() {
-        guard let location = currentLocation else { return }
-        
-        let context = Message.LocationContext(
-            coordinates: Message.Coordinates(
-                latitude: location.coordinate.latitude,
-                longitude: location.coordinate.longitude
-            ),
-            placeName: "Current Location",
-            placeType: "Unknown",
-            duration: durationAtLocation
-        )
-        
-        locationContext = context
+    func getCurrentWeather(completion: @escaping (WeatherState.WeatherCondition?) -> Void) {
+        getCurrentLocation { location in
+            guard let location = location else {
+                completion(nil)
+                return
+            }
+            
+            // In a real app, you would use WeatherKit or another weather API
+            // For this example, we'll use a simplified approach
+            self.fetchWeatherData(for: location) { weatherCondition in
+                completion(weatherCondition)
+            }
+        }
     }
-}
-
-extension LocationService: CLLocationManagerDelegate {
+    
+    private func fetchWeatherData(for location: CLLocation, completion: @escaping (WeatherState.WeatherCondition?) -> Void) {
+        // Simulated weather API call
+        // In a real app, you would call a weather service API
+        
+        // For testing, we'll return a random weather condition or base it on time of day
+        let hour = Calendar.current.component(.hour, from: Date())
+        
+        // Simple logic to determine weather based on time
+        if hour >= 22 || hour < 6 {
+            // Night time - higher chance of clear skies
+            let conditions: [WeatherState.WeatherCondition] = [.clear, .clear, .cloudy]
+            completion(conditions.randomElement())
+        } else if hour >= 6 && hour < 12 {
+            // Morning - mix of conditions
+            let conditions: [WeatherState.WeatherCondition] = [.clear, .cloudy, .rain]
+            completion(conditions.randomElement())
+        } else {
+            // Afternoon/evening - more variety
+            let conditions: [WeatherState.WeatherCondition] = [.clear, .cloudy, .rain, .snow]
+            completion(conditions.randomElement())
+        }
+    }
+    
+    // MARK: - CLLocationManagerDelegate
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        
-        if currentLocation?.distance(from: location) ?? 0 > 50 {
-            // Reset duration when location changes significantly
-            durationAtLocation = 0
-            currentLocation = location
-        }
+        // Handle location updates if needed
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location manager failed with error: \(error.localizedDescription)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        // Handle authorization changes if needed
     }
 }

@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 private let typingID = UUID()
 
 struct ChatView: View {
@@ -17,79 +16,117 @@ struct ChatView: View {
     @State private var messageText = ""
     @State private var responseLength: ResponseLength = .medium
     @State private var showAttachmentOptions = false
+    @State private var showingBackgroundSettings = false
+    @EnvironmentObject var themeManager: ThemeManager
     
     // New properties for squad support
     let currentAI: AI
     @State private var activeSquadMember: AI?
     
     var body: some View {
-        VStack(spacing: 0) {
-            // Squad indicator (if applicable)
-            if currentAI.isSquad {
-                SquadIndicatorView(
-                    squad: currentAI,
-                    activeAI: $activeSquadMember
-                )
-                .padding(.vertical, 8)
-            }
+        ZStack {
+            // Chat background with customization support
+            ChatBackgroundView(settings: themeManager.chatBackgroundSettings)
             
-            // Messages ScrollView
-            ScrollViewReader { proxy in
-                ScrollView {
-                    LazyVStack(spacing: 12) {
-                        ForEach(messages) { message in
-                            ChatBubble(
-                                message: message,
-                                isSquad: currentAI.isSquad,
-                                squadMember: getSquadMember(for: message)
-                            )
-                            .id(message.id)
-                        }
-                        
-                        if isTyping {
-                            TypingIndicator(
-                                isSquad: currentAI.isSquad,
-                                activeAI: activeSquadMember
-                            )
-                            .id(typingID)
-                        }
-                    }
-                    .padding()
-                }
-                .onChange(of: messages) { _ in
-                    withAnimation {
-                        proxy.scrollTo(messages.last?.id ?? typingID, anchor: .bottom)
-
-                    }
-                }
-            }
-            
-            // Response Length Control
-            ResponseLengthControl(selection: $responseLength)
-                .padding(.horizontal)
-            
-            // Message Input
-            VStack(spacing: 8) {
-                if showAttachmentOptions {
-                    AttachmentMenu(
-                        onCamera: handleCamera,
-                        onAttachment: handleGallery  // or whatever function you want to use
+            VStack(spacing: 0) {
+                // Squad indicator (if applicable)
+                if currentAI.isSquad {
+                    SquadIndicatorView(
+                        squad: currentAI,
+                        activeAI: $activeSquadMember
                     )
+                    .padding(.vertical, 8)
                 }
                 
-                MessageInputView(
-                    text: $messageText,
-                    onSend: sendMessage,
-                    onAttachment: { showAttachmentOptions.toggle() },  // Convert binding to closure
-                    onCamera: handleCamera
-                )
+                // Messages ScrollView
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        LazyVStack(spacing: 12) {
+                            ForEach(messages) { message in
+                                ChatBubble(
+                                    message: message,
+                                    isSquad: currentAI.isSquad,
+                                    squadMember: getSquadMember(for: message)
+                                )
+                                .id(message.id)
+                            }
+                            
+                            if isTyping {
+                                TypingIndicator(
+                                    isSquad: currentAI.isSquad,
+                                    activeAI: activeSquadMember
+                                )
+                                .id(typingID)
+                            }
+                        }
+                        .padding()
+                    }
+                    .onChange(of: messages) { _ in
+                        withAnimation {
+                            proxy.scrollTo(messages.last?.id ?? typingID, anchor: .bottom)
+                        }
+                    }
+                }
+                
+                // Response Length Control
+                ResponseLengthControl(selection: $responseLength)
+                    .padding(.horizontal)
+                
+                // Message Input
+                VStack(spacing: 8) {
+                    if showAttachmentOptions {
+                        AttachmentMenu(
+                            onCamera: handleCamera,
+                            onAttachment: handleGallery
+                        )
+                    }
+                    
+                    MessageInputView(
+                        text: $messageText,
+                        onSend: sendMessage,
+                        onAttachment: { showAttachmentOptions.toggle() },
+                        onCamera: handleCamera
+                    )
+                }
+                .padding()
+                .background(Color.white.opacity(0.1))
             }
-            .padding()
-            .background(Color.white.opacity(0.1))
         }
-        .background(
-            ChatBackgroundView(type: backgroundType)
-        )
+        .sheet(isPresented: $showingBackgroundSettings) {
+            ChatBackgroundSettingsView()
+                .environmentObject(themeManager)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                HStack {
+                    // Background settings button
+                    Button(action: {
+                        showingBackgroundSettings = true
+                    }) {
+                        Image(systemName: "paintbrush.fill")
+                            .foregroundColor(.appPrimary)
+                    }
+                    
+                    Menu {
+                        Button(action: {
+                            showingBackgroundSettings = true
+                        }) {
+                            Label("Change Background", systemImage: "paintbrush")
+                        }
+                        
+                        // Add other menu items as needed
+                        Button(action: {
+                            // Chat settings
+                        }) {
+                            Label("Chat Settings", systemImage: "gear")
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis.circle")
+                            .foregroundColor(.appPrimary)
+                    }
+                }
+            }
+        }
     }
     
     private func sendMessage() {
@@ -173,8 +210,6 @@ struct SquadIndicatorView: View {
         }
     }
 }
-
-
 
 // Modified Components
 struct ChatBubble: View {
@@ -332,30 +367,31 @@ struct ChatBubble: View {
     }
     
     // Rest of your existing components remain the same...
+}
+
+#Preview {
+    let mockSquad = AI(
+        id: UUID(),
+        name: "Dream Team",
+        category: .specialist,
+        description: "A powerful squad",
+        avatar: "",
+        backgroundColor: "default",
+        isLocked: false,
+        stats: AI.AIStats(messagesCount: 0, responseTime: 0, userRating: 0, lastInteraction: Date()),
+        securityEnabled: false,
+        isSquad: true,
+        squadMembers: [
+            AI(id: UUID(), name: "AI 1", category: .friend, description: "", avatar: "", backgroundColor: "default", isLocked: false, stats: AI.AIStats(messagesCount: 0, responseTime: 0, userRating: 0, lastInteraction: Date()), securityEnabled: false),
+            AI(id: UUID(), name: "AI 2", category: .professional, description: "", avatar: "", backgroundColor: "default", isLocked: false, stats: AI.AIStats(messagesCount: 0, responseTime: 0, userRating: 0, lastInteraction: Date()), securityEnabled: false)
+        ]
+    )
     
-    #Preview {
-        let mockSquad = AI(
-            id: UUID(),
-            name: "Dream Team",
-            category: .specialist,
-            description: "A powerful squad",
-            avatar: "",
-            backgroundColor: "default",
-            isLocked: false,
-            stats: AI.AIStats(messagesCount: 0, responseTime: 0, userRating: 0, lastInteraction: Date()),
-            securityEnabled: false,
-            isSquad: true,
-            squadMembers: [
-                AI(id: UUID(), name: "AI 1", category: .friend, description: "", avatar: "", backgroundColor: "default", isLocked: false, stats: AI.AIStats(messagesCount: 0, responseTime: 0, userRating: 0, lastInteraction: Date()), securityEnabled: false),
-                AI(id: UUID(), name: "AI 2", category: .professional, description: "", avatar: "", backgroundColor: "default", isLocked: false, stats: AI.AIStats(messagesCount: 0, responseTime: 0, userRating: 0, lastInteraction: Date()), securityEnabled: false)
-            ]
-        )
-        
-        return ChatView(
-            messages: .constant([]),
-            isTyping: .constant(false),
-            backgroundType: "default",
-            currentAI: mockSquad
-        )
-    }
+    return ChatView(
+        messages: .constant([]),
+        isTyping: .constant(false),
+        backgroundType: "default",
+        currentAI: mockSquad
+    )
+    .environmentObject(ThemeManager())
 }

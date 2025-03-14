@@ -71,6 +71,7 @@
 		EF4F17BC2CCFC44A00D89BBD /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17532CCBA40500D89BBD /* HapticManager.swift */; };
 		EF4F17BD2CCFC45000D89BBD /* StorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17832CCF6D9200D89BBD /* StorageProvider.swift */; };
 		EF4F17BE2CCFC45700D89BBD /* AIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4F17822CCF6D8900D89BBD /* AIProvider.swift */; };
+		EF5DEBBC2D8411EE00CD538D /* ChatBackgroundSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5DEBBB2D8411DD00CD538D /* ChatBackgroundSettingsView.swift */; };
 		EF65602D2CCFE9C600609D6D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = EF65602C2CCFE9C600609D6D /* Lottie */; };
 		EF8EA5132CE2123A007C4EEB /* shopkeeper_wave.json in Resources */ = {isa = PBXBuildFile; fileRef = EF8EA5122CE21235007C4EEB /* shopkeeper_wave.json */; };
 		EF8EA5152CE212E2007C4EEB /* shopkeeper_point.json in Resources */ = {isa = PBXBuildFile; fileRef = EF8EA5142CE212DB007C4EEB /* shopkeeper_point.json */; };
@@ -170,6 +171,7 @@
 		EF4F17812CCF6D4B00D89BBD /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		EF4F17822CCF6D8900D89BBD /* AIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProvider.swift; sourceTree = "<group>"; };
 		EF4F17832CCF6D9200D89BBD /* StorageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageProvider.swift; sourceTree = "<group>"; };
+		EF5DEBBB2D8411DD00CD538D /* ChatBackgroundSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBackgroundSettingsView.swift; sourceTree = "<group>"; };
 		EF8EA5122CE21235007C4EEB /* shopkeeper_wave.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = shopkeeper_wave.json; sourceTree = "<group>"; };
 		EF8EA5142CE212DB007C4EEB /* shopkeeper_point.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = shopkeeper_point.json; sourceTree = "<group>"; };
 		EF8EA5162CE21383007C4EEB /* shopkeeper_celebrate.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = shopkeeper_celebrate.json; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 		EF4F17302CCB9CAF00D89BBD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EF5DEBBB2D8411DD00CD538D /* ChatBackgroundSettingsView.swift */,
 				EF97B1232D30DDA200795B04 /* AttachmentsView.swift */,
 				EF4F175A2CCBA52900D89BBD /* HomeView.swift */,
 				EF4F17592CCBA52200D89BBD /* ChatView.swift */,
@@ -820,6 +823,7 @@
 				EF05F9D82CD67FEC00430AE4 /* SoundManager.swift in Sources */,
 				EF4F17B42CCFC3D400D89BBD /* ChatManager.swift in Sources */,
 				EF4F17922CCFC2C900D89BBD /* ChatBubble.swift in Sources */,
+				EF5DEBBC2D8411EE00CD538D /* ChatBackgroundSettingsView.swift in Sources */,
 				EF4F17892CCFC26B00D89BBD /* ChatView.swift in Sources */,
 				EF4F17B52CCFC3DB00D89BBD /* SquadManager.swift in Sources */,
 				EF4F17BB2CCFC44400D89BBD /* Animations.swift in Sources */,
